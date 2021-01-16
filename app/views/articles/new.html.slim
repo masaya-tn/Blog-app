@@ -3,12 +3,4 @@ h1 記事の新規登録
 .nav.justify-content-end
   = link_to '一覧', articles_path, class: 'nav-link'
 
-
-= form_with model: @article, local: true do |f|
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control', id: 'article_title'
-  .form-group
-    = f.label :content
-    = f.text_area :content, class: 'form-control', id: 'article_content'
-  = f.submit nil, class: 'btn btn-primary'
+= render partial: 'form', locals: { article: @article }
