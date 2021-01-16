@@ -11,7 +11,7 @@ ja:
       article: 記事
     attributes:
       article:
-        id: 10
+        id: ID
         title: タイトル
         content: 内容
         created_at: 登録日時
