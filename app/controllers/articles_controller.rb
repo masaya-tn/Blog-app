@@ -27,6 +27,12 @@ class ArticlesController < ApplicationController
     redirect_to articles_url, notice: "記事「#{article.title}」を更新しました。"
   end
 
+  def destroy
+    article = Article.find(params[:id])
+    article.destroy
+    redirect_to articles_url, notice: "記事「#{article.title}」を削除しました。"
+  end
+
   private
 
   def article_params
