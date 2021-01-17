@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+
   def index
-    @articles = current_user.articles
+    @articles = current_user.articles.order(created_at: :desc)
   end
 
   def show
-    @article = current_user.articles.find(params[:id])
   end
 
   def new
@@ -22,18 +23,15 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = current_user.articles.find(params[:id])
   end
 
   def update
-    article = current_user.articles.find(params[:id])
-    article.update!(article_params)
+    @article.update!(article_params)
     redirect_to articles_url, notice: "記事「#{article.title}」を更新しました。"
   end
 
   def destroy
-    article = current_user.articles.find(params[:id])
-    article.destroy
+    @article.destroy
     redirect_to articles_url, notice: "記事「#{article.title}」を削除しました。"
   end
 
@@ -41,5 +39,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :content)
+  end
+
+  def set_article
+    @article = current_user.articles.find(params[:id])
   end
 end
