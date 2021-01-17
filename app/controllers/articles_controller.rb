@@ -1,10 +1,10 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = current_user.articles
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
   end
 
   def new
@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
 
     if @article.save
       redirect_to @article, notice: "記事「#{@article.title}」を追加しました"
@@ -22,17 +22,17 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
   end
 
   def update
-    article = Article.find(params[:id])
+    article = current_user.articles.find(params[:id])
     article.update!(article_params)
     redirect_to articles_url, notice: "記事「#{article.title}」を更新しました。"
   end
 
   def destroy
-    article = Article.find(params[:id])
+    article = current_user.articles.find(params[:id])
     article.destroy
     redirect_to articles_url, notice: "記事「#{article.title}」を削除しました。"
   end

@@ -1,6 +1,8 @@
 class Article < ApplicationRecord
   validates :title, presence: true
 
+  belogns_to :user
+
   private
 
   def validate_title_not_including_comma
