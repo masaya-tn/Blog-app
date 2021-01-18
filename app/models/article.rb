@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
   validates :title, presence: true
 
-  belogns_to :user
+  belongs_to :user
 
   scope :recent, -> { order(created_at: :desc) }
 
